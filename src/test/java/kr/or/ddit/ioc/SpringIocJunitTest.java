@@ -68,7 +68,7 @@ public class SpringIocJunitTest {
 		assertNotEquals(boardDao, boardDaoPrototype);
 		assertNotEquals(boardDaoPrototype, boardDaoPrototype2);
 	}
-	
+	 
 	/**
 	* Method : SpringIocTest
 	* 작성자 : PC13
