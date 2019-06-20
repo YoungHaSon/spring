@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 스프링 컨테이너에서 관리하고자 하는 빈을 등록 -->
+
+	<!-- boardService 등록하기 위해선 boardDao필요 -->
+	
+	<bean id="boardDao" class="kr.or.ddit.board.dao.BoardDao"></bean>
+	
+	<!-- prototype scope boardDao -->
+	<!-- 요청을 할때마다 준다? 요청할때 마다 달라짐 -->
+	<bean id="boardDaoPrototype" class="kr.or.ddit.board.dao.BoardDao" scope="prototype"/>
+	
+	<bean id="boardService" class="kr.or.ddit.board.service.BoardService" >
+		<!-- boardService의 field, property -->
+		<!-- setter injection(주입) -->
+		<property name="boradDao" ref="boardDao"></property>
+	</bean>
+
+	<bean id="boardServiceConstructor" class="kr.or.ddit.board.service.BoardService">
+		<!-- constructor injection(주입) -->
+		<constructor-arg ref="boardDao"/>
+	</bean>
+</beans>
