@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import kr.or.ddit.board.dao.BoardDao;
 import kr.or.ddit.board.dao.IboardDao;
 import kr.or.ddit.board.service.BoardService;
-import kr.or.ddit.board.service.IboardService;
 
 @Configuration
 public class ApplicationIocConfig {
