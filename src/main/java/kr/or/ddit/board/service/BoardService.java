@@ -6,13 +6,15 @@ public class BoardService implements IboardService {
 	
 	//필드명
 	private IboardDao boradDao;
+	private String name;
 	
 	//기본 생성자
 	public BoardService() {
 	}
 	
-	public BoardService(IboardDao boradDao) {
+	public BoardService(IboardDao boradDao, String name) {
 		this.boradDao = boradDao;
+		this.name = name;
 	}
 
 	@Override
@@ -27,5 +29,15 @@ public class BoardService implements IboardService {
 	public void setBoradDao(IboardDao boradDao) {
 		this.boradDao = boradDao;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 
 }
