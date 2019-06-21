@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+	<select id="userList" resultType="UserVo">
+		select * from users
+		order by UserId
+	</select>
+
+	<select id="getUser" resultType="UserVo" parameterType="String">
+		select
+		*
+		from
+		users
+		where
+		USERID = #{userid}
+	</select>
+
+	<!-- 사용자 페이지 리스트 조회 -->
+	<!-- n페이지 n*10-9~n*10 : rn >=(n-1)*10+1 and rn <= n*10; -->
+	<!-- mybatis에서 C Data 사용하기!! 어떤 문자든 사용가능합니다~-->
+	<!--  pageVo int page, int pageSize -->
+	<!-- 페이지로 띄워줄 것이 UserVo니까 resultType은 UserVo여야함  -->
+	
+<!-- 	<select id="userPagingList" parameterType="pageVo" resultType="UserVo"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		select * -->
+<!-- 		from -->
+<!-- 		(select a.*, rownum rn -->
+<!-- 		from -->
+<!-- 		(select a.* -->
+<!-- 		from users a -->
+<!-- 		order by userid) a) -->
+<!-- 		where rn >=(#{page}-1)*#{pageSize}+1 and rn <= #{page}*#{pageSize} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+	<!-- 사용자 전체 수 조회 쿼리튜닝! -->
+	<select id="usersCnt" resultType="int">
+		select /*+INDEX_FFS(users PK_USERS)*/ count(*)
+		from 
+			users
+	</select>
+
+<!-- 사용자 등록 -->
+	<insert id="insertUser" parameterType="UserVo">
+		insert into users 
+		VALUES
+			(#{userId},#{name},#{alias},#{pass},#{addr1},#{addr2},#{zipcd},#{birth},#{path, jdbcType=VARCHAR},#{filename, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 사용자 삭제 -->
+	<delete id="deleteUser" parameterType="String" >
+		delete users
+			where userId=#{userId}
+	</delete>
+	
+	<update id="updateUser" parameterType="UserVo">
+		update users
+			set
+			    NAME = #{name},
+			    ALIAS = #{alias},
+			    PASS = #{pass},
+			    ADDR1 = #{addr1},
+			    ADDR2 = #{addr2 },
+			    ZIPCD = #{zipcd},
+			    BIRTH = #{birth},
+			    PATH = #{path, jdbcType=VARCHAR},
+			    FILENAME = #{filename, jdbcType=VARCHAR}
+			where
+	  			USERID = #{userId}
+	</update>
+	
+	<select id="userListForPassEncrypt" resultType="UserVo">
+		select *
+		from users
+		where userid not in ('brown')
+	</select>
+	<!-- 사용자 비밀번호 업데이트  -->
+	<update id="updateUserEncryptPass" parameterType="UserVo">
+		update users set pass = #{pass}
+		where userid =#{userId}
+
+	</update>	
+
+</mapper>
