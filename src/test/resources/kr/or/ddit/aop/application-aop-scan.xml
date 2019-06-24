@@ -8,9 +8,12 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- @Controller, @Service, @Repository, @Component 4가지 @가 붙은 클래스를 스프링 빈으로 등록되어있는데 @Aspect도 추가하는 방법 -->
-	<context:component-scan base-package="kr.or.ddit">
+	<context:component-scan base-package="kr.or.ddit.board">
 		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controll"/>
+	</context:component-scan>
+	
+	<context:component-scan base-package="kr.or.ddit.aop">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
 	</context:component-scan>
 	
 <!-- 	<bean id="boardService" class="kr.or.ddit.board.service.BoardService"/> -->
