@@ -11,7 +11,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
-<!-- view에 대한 설정! nameSpace에 mvc를 추가 해준다!-->
+	<!-- view에 대한 설정! nameSpace에 mvc를 추가 해준다!-->
 	<mvc:annotation-driven/>
 	
 	<mvc:default-servlet-handler/>

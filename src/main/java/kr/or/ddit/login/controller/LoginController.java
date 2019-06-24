@@ -20,10 +20,12 @@ public class LoginController {
 	private IuserService userService;
 
 	/**
-	 * Method : loginView 작성자 : PC13 변경이력 :
-	 * 
+	 * Method : loginView 
+	 * 작성자 : PC13 
+	 * 변경이력 :
 	 * @param session
-	 * @return Method 설명 : 사용자 로그인 화면 요청
+	 * @return 
+	 * Method 설명 : 사용자 로그인 화면 요청
 	 */
 	// 전에 했던 jps login 부분!
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
@@ -37,9 +39,11 @@ public class LoginController {
 
 	// post
 	/**
-	 * Method : loginProcess 작성자 : PC13 변경이력 :
-	 * 
-	 * @return Method 설명 : 사용자 로그인 요청 처리
+	 * Method : loginProcess 
+	 * 작성자 : PC13 
+	 * 변경이력 :
+	 * @return 
+	 * Method 설명 : 사용자 로그인 요청 처리
 	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String loginProcess(String userId, String password, String rememberme, HttpServletResponse response, HttpSession session) {// 인자로 주기만 하면 매개변수를 받은거다?
