@@ -7,7 +7,7 @@
 
 	<select id="userList" resultType="UserVo">
 		select * from users
-		order by UserId
+		order by userid
 	</select>
 
 	<select id="getUser" resultType="UserVo" parameterType="String">
@@ -16,7 +16,7 @@
 		from
 		users
 		where
-		USERID = #{userid}
+		USERID = #{userId}
 	</select>
 
 	<!-- 사용자 페이지 리스트 조회 -->

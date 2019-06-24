@@ -5,7 +5,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- scan -->
-	<context:component-scan base-package="kr.or.ddit"/>
+	<!-- 
+	Bean scan 
+	@Controller, Service, Repository, Component를 기본적으로 스캔!
+	
+	use-default-filters="false" 자동적으로 태그를 포함시키는걸 없애는! (true 하면 자동 포함)
+	-->
+	
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
 
 </beans>

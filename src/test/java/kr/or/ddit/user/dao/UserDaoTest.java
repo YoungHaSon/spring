@@ -20,6 +20,12 @@ public class UserDaoTest extends LogicTestEvn {
 	@Resource(name = "userDao")
 	private IuserDao UserDao;
 
+	/**
+	* Method : userListTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* Method 설명 : 전체 사용자 조회 테스트
+	*/
 	@Test
 	public void userListTest() {
 		/*** Given ***/
@@ -32,6 +38,13 @@ public class UserDaoTest extends LogicTestEvn {
 		assertTrue(userList.size() >= 100);
 	}
 
+	/**
+	* Method : insertUserTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* @throws ParseException
+	* Method 설명 : 사용자 등록, 삭제 테스트
+	*/
 	@Test
 	public void insertUserTest() throws ParseException {
 		/*** Given ***/
@@ -51,6 +64,25 @@ public class UserDaoTest extends LogicTestEvn {
 		// data 삭제
 		int deleteUser = UserDao.deleteUser(userVo.getUserId());
 		assertEquals(1, deleteUser);
+	}
+	
+	/**
+	* Method : getUser
+	* 작성자 : PC13
+	* 변경이력 :
+	* Method 설명 : 사용자 정보 조회 테스트
+	*/
+	@Test
+	public void getUser() {
+		/***Given***/
+		String userId = "brown";
+
+		/***When***/
+
+		UserVo userVo = UserDao.getUser(userId);
+		/***Then***/
+		assertEquals("브라움", userVo.getName());
+		
 	}
 
 }

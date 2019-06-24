@@ -14,7 +14,9 @@
 	<bean id="profilingAspect" class="kr.or.ddit.aop.profilingAspect"/>
 	
 	<!-- @Controller, @Service, @Repository, @Component 4가지 @가 붙은 클래스를 스프링 빈으로 등록 -->
-	<context:component-scan base-package="kr.or.ddit"/>
+	<context:component-scan base-package="kr.or.ddit.board">
+		<context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
+	</context:component-scan>
 	<context:annotation-config/>
 
 	<!-- 설정 aop:config -->

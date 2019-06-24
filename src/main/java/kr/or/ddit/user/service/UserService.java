@@ -15,19 +15,55 @@ public class UserService implements IuserService {
 	@Resource(name="userDao")
 	private IuserDao userDao;
 	
+	/**
+	* Method : userList
+	* 작성자 : PC13
+	* 변경이력 :
+	* @return
+	* Method 설명 : 전체 회원 리스트 받아오는!
+	*/
 	@Override
 	public List<UserVo> userList() {
 		return userDao.userList();
 	}
 
+	/**
+	* Method : insertUser
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param userVo
+	* @return
+	* Method 설명 : 사용자 등록
+	*/
 	@Override
 	public int insertUser(UserVo userVo) {
 		return userDao.insertUser(userVo);
 	}
-
+	
+	/**
+	* Method : deleteUser
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 사용자 삭제
+	*/
 	@Override
 	public int deleteUser(String userId) {
 		return userDao.deleteUser(userId);
+	}
+
+	/**
+	* Method : getUser
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 사용자 정보 조회
+	*/
+	@Override
+	public UserVo getUser(String userId) {
+		return userDao.getUser(userId);
 	}
 
 }

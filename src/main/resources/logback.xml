@@ -10,7 +10,7 @@
        <appender-ref ref="STDOUT" />
    </logger> 
 
-   <logger name="kr.or.ddit.servlet" level="debug">
+   <logger name="org.springframework" level="debug">
        <appender-ref ref="STDOUT" />
    </logger> 
  
