@@ -1,5 +1,7 @@
 package kr.or.ddit.main.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,8 +17,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 //mainController가 잘되는지 Test
 
@@ -58,9 +62,86 @@ public class MainControllerTest2 {
 	*/
 	@Test
 	public void mainViewAndExpectTest() throws Exception {
-		mockMvc.perform(get("/main")).andExpect(status().isOk())
+		mockMvc.perform(get("/main")).andExpect(status().isOk()) //is(200)과 같음
 									.andExpect(view().name("main"))
-									.andExpect(model().attribute("mainUserId", "brown" ));
+									.andExpect(model().attribute("mainUserId", "brown" ))
+									.andExpect(model().attributeExists("rangers"))
+									.andExpect(model().attributeExists("userVo"));
+	}
+	
+	/**
+	* Method : mainViewMavTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* Method 설명 : ModelAndView 객체를 이용한 main 페이지 요청 테스트
+	 * @throws Exception 
+	*/
+	@Test
+	public void mainViewMavTest() throws Exception {
+		/***Given***/
 		
+
+		/***When***/
+		MvcResult mvcResult = mockMvc.perform(get("/mainMav")).andReturn();
+		ModelAndView mav = mvcResult.getModelAndView();
+		
+		/***Then***/
+		//ViewName이 기대하는 문자열로 리턴 되었는지!
+		assertEquals("main", mav.getViewName());
+		logger.debug("-->mav.getViewName() : {}",mav.getViewName() );
+		
+		//model객체에 controller에서 설정한 속성이 있는지!!
+		assertEquals("brown", mav.getModel().get("mainUserId"));
+		logger.debug("-->mav.getModel().get(\"mainUserId\") : {}",mav.getModel().get("mainUserId") );
+		
+		assertNotNull(mav.getModel().get("rangers"));
+		logger.debug("-->mav.getModel().get(\"rangers\") : {}",mav.getModel().get("rangers") );
+	}
+	
+	/**
+	* Method : pathVariableTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* @throws Exception
+	* Method 설명 : @pathvariable 테스트
+	*/
+	@Test
+	public void pathVariableTest() throws Exception {
+		mockMvc.perform(get("/main/pathvariable/brown"))
+						.andExpect(status().isOk())
+						.andExpect(view().name("main")); //jsp 이름?
+	}
+	
+	/**
+	* Method : pathVariableTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* @throws Exception
+	* Method 설명 : @pathvariable2 테스트
+	*/
+	@Test
+	public void pathVariableTest2() throws Exception {
+		mockMvc.perform(get("/main/pathvariable/sally"))
+						.andExpect(status().isOk())
+						.andExpect(view().name("main")); //jsp 이름?
+	}
+	
+	/**
+	* Method : requestheaderTest
+	* 작성자 : PC13
+	* 변경이력 :
+	* @throws Exception
+	* Method 설명 : @requestheaderTest 
+	*/
+	@Test
+	public void requestheaderTest() throws Exception{
+		mockMvc.perform(get("/main/header"))
+						.andExpect(status().isOk())
+						.andExpect(view().name("main")); //jsp 이름?
 	}
 }
+
+
+
+
+

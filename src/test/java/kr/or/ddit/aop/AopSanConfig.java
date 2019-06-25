@@ -10,8 +10,10 @@ import org.springframework.context.annotation.FilterType;
 @Configuration
 @ComponentScan(basePackages = {"kr.or.ddit.board"},includeFilters = @ComponentScan.Filter(type=FilterType.ANNOTATION, value=Aspect.class))
 
-@EnableAspectJAutoProxy
+//최상위 패키지에 있는 클래스에 Annotation을 적용해서 AOP를 찾을 수 있게 해준다.
+@EnableAspectJAutoProxy //까먹지 말자. 요놈 안 넣고 AOP 안 된다고 울지 말자!!!!!!!!!!!!!!!!
 public class AopSanConfig {
+
 
 	
 }

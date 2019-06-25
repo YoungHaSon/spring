@@ -8,6 +8,7 @@
 
 	<typeAliases>
 		<typeAlias alias="uservo" type="kr.or.ddit.user.model.UserVo" />
+		<typeAlias alias="pagevo" type="kr.or.ddit.user.model.PageVo" />
 	</typeAliases>
 
 	<mappers><!-- sql문 관리 -->

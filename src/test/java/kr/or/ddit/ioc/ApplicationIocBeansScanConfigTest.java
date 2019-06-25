@@ -2,7 +2,6 @@ package kr.or.ddit.ioc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import javax.annotation.Resource;
 
@@ -11,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.or.ddit.board.dao.BoardDao;
 import kr.or.ddit.board.dao.IboardDao;
 import kr.or.ddit.board.service.IboardService;
 

@@ -45,8 +45,8 @@ public class LoginController {
 	 * @return 
 	 * Method 설명 : 사용자 로그인 요청 처리
 	 */
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String loginProcess(String userId, String password, String rememberme, HttpServletResponse response, HttpSession session) {// 인자로 주기만 하면 매개변수를 받은거다?
+	@RequestMapping(path = "/login", method = RequestMethod.POST) // 인자로 주기만 하면 매개변수를 받은거다?
+	public String loginProcess(String userId, String password, String rememberme, HttpServletResponse response, HttpSession session) {
 		String encryptPassword = KISA_SHA256.encrypt(password);
 		UserVo userVo = userService.getUser(userId);
 

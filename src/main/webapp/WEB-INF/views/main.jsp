@@ -65,7 +65,7 @@
 			<h3>상세내역</h3>
 			<p>Spring과정에서는 다음과 같은 내용을 학습한다.</p>
 			<ul>
-				<li>servlet 동작원리</li>
+				<li>${userVo}</li>
 				<li>jsp와 servlet의 관계</li>
 				<li>jsp 스크립틀릿 요소</li>
 				<li>jsp action tag (standard)</li>

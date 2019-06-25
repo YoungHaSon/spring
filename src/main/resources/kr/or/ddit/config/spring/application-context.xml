@@ -22,5 +22,11 @@
 		<property name="prefix" value="/WEB-INF/views/"/> <!-- 접두 -->
 		<property name="suffix" value=".jsp"/> <!-- 접미 -->
 	</bean>	
+	
+	<!-- multipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSizePerFile" value="3145728"/> <!-- 파일용량 -->
+		<property name="maxUploadSize" value="15728640"/> <!-- 파일개수 -->
+	</bean>
 
 </beans>

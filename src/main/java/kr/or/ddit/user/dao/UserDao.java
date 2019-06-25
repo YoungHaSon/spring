@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
 
 @Repository
@@ -66,6 +67,21 @@ public class UserDao implements IuserDao {
 	@Override
 	public UserVo getUser(String userId) {
 		return sqlSession.selectOne("user.getUser",userId);
+	}
+
+	@Override
+	public List<UserVo> userPagingList(PageVo pageVo) {
+		return sqlSession.selectList("user.userPagingList", pageVo);
+	}
+
+	@Override
+	public int usersCnt() {
+		return (Integer) sqlSession.selectOne("user.usersCnt");
+	}
+
+	@Override
+	public int updateUser(UserVo userVo) {
+		return (Integer) sqlSession.update("user.updateUser", userVo);
 	}
 	
 }

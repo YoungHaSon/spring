@@ -18,9 +18,11 @@
 <!-- 	<bean id="boardDao" class="kr.or.ddit.board.dao.BoardDao"/> -->
 <!-- 	<bean id="profilingAspect" class="kr.or.ddit.aop.profilingAspect"/> -->
 	
+	<!-- @Aspect 어노테이션이 적용된 빈을 Aspect로 사용할 수 있게 해준다 -->
+	<!-- AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기?? -->
 	<aop:aspectj-autoproxy/>
 	
-	<!-- ??? -->
+	<!-- 빈 주입 처리 : scan 방식에서는 없어도 된다? scan에서 다 처리함? (component때매!!) -->
 	<context:annotation-config/>
 	
 </beans>
