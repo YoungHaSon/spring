@@ -75,7 +75,7 @@
 					<div class="col-sm-8 blog-main">
 						<h2 class="sub-header">사용자 수정</h2>
 						
-						<form id="frm" class="form-horizontal" role="form" action="${cp }/UserModifyController" method="post"
+						<form id="frm" class="form-horizontal" role="form" action="${cp }/user/modify" method="post"
 						enctype="multipart/form-data">
 						
 							<div class="form-group">
@@ -99,12 +99,12 @@
 								</div>
 							</div>
 							
-							<div class="form-group">
-								<label for="userNm" class="col-sm-2 control-label">비밀번호&nbsp;&nbsp; :  </label>
-								<div class="col-sm-10">
-									<input type="password" class="form-control" id="pass" name="pass" placeholder="비밀번호" value="${userVo.pass }"  />
-								</div>
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="userNm" class="col-sm-2 control-label">비밀번호&nbsp;&nbsp; :  </label> -->
+<!-- 								<div class="col-sm-10"> -->
+<%-- 									<input type="password" class="form-control" id="pass" name="pass" placeholder="비밀번호" value="${userVo.pass }"  /> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">별명&nbsp;&nbsp; :  </label>
@@ -114,12 +114,14 @@
 							</div>
 							
 							<div class="form-group">
-								<label for="userNm" class="col-sm-2 control-label">생일&nbsp;&nbsp; :  </label>
-								<div class="col-sm-10">																		<!--  -->
-									<input type="date" class="form-control" id="birth" name="birth" placeholder="생일" value="${userVo.birthStr }" /> 
-								</div>
-							</div>
-							
+	                        <label for="birth" class="col-sm-2 control-label">생일</label>
+	                        <div class="col-sm-10">
+	                           <input type="date" class="form-control" id="birth" name="birth"
+	                              placeholder="생일" 
+	                              value="<fmt:formatDate value="${userVo.birth}" pattern="yyyy-MM-dd"/>"/>
+		                        </div>
+		                     </div>
+								
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">우편번호&nbsp;&nbsp; :  </label>
 								<div class="col-sm-8">

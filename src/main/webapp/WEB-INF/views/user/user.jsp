@@ -42,7 +42,7 @@
 					<div class="col-sm-8 blog-main">
 						<h2 class="sub-header">사용자 상세정보</h2>
 						
-						<form id="frm" class="form-horizontal" role="form" action="${cp }/UserModifyController" method="get">
+						<form id="frm" class="form-horizontal" role="form" action="${cp }/user/modify" method="get">
 							<input value="${userVo.userId }" type="hidden" id="userId" name="userId">
 							
 							<div class="form-group">

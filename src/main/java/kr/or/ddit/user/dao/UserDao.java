@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -82,6 +83,16 @@ public class UserDao implements IuserDao {
 	@Override
 	public int updateUser(UserVo userVo) {
 		return (Integer) sqlSession.update("user.updateUser", userVo);
+	}
+
+	@Override
+	public List<UserVo> userListForPassEncrypt(SqlSession sqlSession) {
+		return sqlSession.selectList("user.userListForPassEncrypt");
+	}
+
+	@Override
+	public int updateUserEncryptPass(SqlSession sqlSession, UserVo userVo) {
+		return sqlSession.update("user.updateUserEncryptPass",userVo);
 	}
 	
 }

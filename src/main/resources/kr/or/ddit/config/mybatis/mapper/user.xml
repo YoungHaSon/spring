@@ -63,7 +63,6 @@
 			set
 			    NAME = #{name},
 			    ALIAS = #{alias},
-			    PASS = #{pass},
 			    ADDR1 = #{addr1},
 			    ADDR2 = #{addr2 },
 			    ZIPCD = #{zipcd},
