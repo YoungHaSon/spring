@@ -62,7 +62,7 @@
   	</select>
   	
   	<select id="lprodList" resultType="lprodvo">
-  		select lprod_gu
+  		select *
 	    from lprod
 	    order by lprod_id
   	</select>

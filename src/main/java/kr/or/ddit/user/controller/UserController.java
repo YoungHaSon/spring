@@ -3,6 +3,7 @@ package kr.or.ddit.user.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -12,11 +13,13 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.model.UserVoValidator;
 import kr.or.ddit.user.service.IuserService;
 import kr.or.ddit.util.PartUtil;
 
@@ -52,6 +56,40 @@ public class UserController {
 		//userList라는 키 값에 userService.userList() 유저 리스트를 담아놓음!
 		model.addAttribute("userList", userService.userList());
 		return "user/userList";
+	}
+	
+	/**
+	* Method : userListExcel
+	* 작성자 : PC13
+	* 변경이력 :
+	* @return
+	* Method 설명 :사용자 정보를 excel로 변환?
+	*/
+	@RequestMapping("/userListExcel")
+	public String userListExcel(Model model, String userId, String filename) {
+		List<String> header = new ArrayList<String>();
+		header.add("userId");
+		header.add("name");
+		header.add("alias");
+		header.add("addr1");
+		header.add("addr2");
+		header.add("zipcd");
+		header.add("birth");
+		 
+		List<UserVo> userList =null;
+		
+		if(userId==null) {
+			model.addAttribute("userList", userService.userList());
+		}else {
+			userList= new ArrayList<UserVo>();
+			userList.add(userService.getUser(userId));
+			model.addAttribute("userList", userList);
+		}
+		model.addAttribute("header", header);
+		model.addAttribute("filename", filename);
+		model.addAttribute("data", userService.userList());
+		
+		return "userExcelView"; //--> 빈 등록은 이 이름으로!  
 	}
 	
 	/**
@@ -102,6 +140,23 @@ public class UserController {
 	}
 	
 	/**
+	* Method : userAjax
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param userId
+	* @param model
+	* @return
+	* Method 설명 : 사용자 정보 json응답
+	*/
+	@RequestMapping("/userJson")
+	public String userJson(String userId, Model model){
+		
+		model.addAttribute("userVo", userService.getUser(userId));
+		//beanName 리턴
+		return "jsonView";
+	}
+
+	/**
 	* Method : userForm
 	* 작성자 : PC13
 	* 변경이력 :
@@ -126,8 +181,16 @@ public class UserController {
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	*/
-	@RequestMapping(path = "/form", method = RequestMethod.POST) //name 속성명!
-	public String userForm(UserVo userVo, String userId, String pass, MultipartFile profile, Model model) throws IllegalStateException, IOException{
+//	@RequestMapping(path = "/form", method = RequestMethod.POST) //name 속성명!
+	public String userForm(UserVo userVo, BindingResult result, String userId, String pass, MultipartFile profile, Model model) throws IllegalStateException, IOException{
+		//validator 실행!
+		new UserVoValidator().validate(userVo, result);
+		
+		//에러 없으면 다음 페이지 있으면 다시 등록 페이지
+		if(result.hasErrors()) {
+			return "user/userForm";
+		}
+		
 		logger.debug("♬♪♩ userForm profile ");
 		
 		String viewName = "";
@@ -164,36 +227,13 @@ public class UserController {
 	* Method 설명 : 사용자 사진 응답 생성
 	*/
 	@RequestMapping("/profile")
-	public void profile(String userId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String profile(String userId, Model model) throws IOException {
 		//사용자 정보(Path)를 조회
 			UserVo userVo = userService.getUser(userId);
-			//path 정보로 file을 읽어서 
-			ServletOutputStream sos = response.getOutputStream();
-			FileInputStream fis = null;
-			String filePath = userVo.getPath();
+			model.addAttribute("userVo", userVo);
 			
-			//실제로 해당 파일이있는지 없는지 체크..!
-			if(filePath == null){
-				filePath =  request.getServletContext().getRealPath("/img/사진없음.jpg");
-		      } else {
-		         File checkFile = new File(filePath);
-		         
-		         if(!checkFile.exists()) {
-		        	 filePath =  request.getServletContext().getRealPath("/img/사진없음.jpg");
-		         }
-		      }
-			//화면에 띄워주는 부분!
-			File file = new File(filePath);
-			fis = new FileInputStream(file);
-			byte[] buffer = new byte[512];
-			
-			//다읽으면 -1 반환, 	
-			//response 객체에 스트림으로 ? 써준다?
-			while(fis.read(buffer, 0, 512) != -1){
-				sos.write(buffer);
-			}
-			fis.close();
-			sos.close();
+			//profileView에서 처리하게 할예정
+			return "profileView";
 	}
 	
 	/**
@@ -272,4 +312,56 @@ public class UserController {
 		
 		profile.transferTo(new File(filePath));
 	}
+	
+	
+	/**
+	* Method : userFormjsr
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param userVo
+	* @param result
+	* @param userId
+	* @param pass
+	* @param profile
+	* @param model
+	* @return
+	* @throws IllegalStateException
+	* @throws IOException
+	* Method 설명 : Valid 테스트!
+	*/
+	@RequestMapping(path = "/form", method = RequestMethod.POST) //name 속성명!
+	public String userFormjsr(@Valid UserVo userVo, BindingResult result, String userId, String pass, MultipartFile profile, Model model) throws IllegalStateException, IOException{
+
+//		//validator 실행!
+//		new UserVoValidator().validate(userVo, result);
+		
+		//에러 없으면 다음 페이지 있으면 다시 등록 페이지
+		if(result.hasErrors()) {
+			return "user/userForm";
+		}
+		
+		logger.debug("♬♪♩ userForm profile ");
+		
+		String viewName = "";
+		UserVo dbUser = userService.getUser(userId);
+		
+		if(dbUser == null) {
+			if(profile.getSize() > 0) {
+				profileUpload(userVo, profile);
+			}
+			userVo.setPass(KISA_SHA256.encrypt(pass));
+			int insertCnt = userService.insertUser(userVo);
+			
+			if(insertCnt == 1) {
+				viewName = "redirect:/user/pagingList";
+			}
+			
+		}else { 
+				model.addAttribute("msg", "이미 존재하는 사용자입니다.");
+				viewName = userForm();
+		}
+		return viewName;
+	}
+	
+	
 }

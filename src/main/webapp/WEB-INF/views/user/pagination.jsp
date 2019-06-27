@@ -63,7 +63,7 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자</h2>
+						<h2 class="sub-header"><a href="${cp}/user/userListExcel?filename=userList">UserList</a></h2>
 						
 						<!-- 사용자 상세조회 : userId필요 -->
 						<form id="frm" action="${cp }/user/user" method="get">
@@ -82,11 +82,11 @@
  								<!-- userList user들을 출력해주는! -->
 								<c:forEach items="${userList }" var="vo">
 									<!-- data-는 참고로 대문자 안먹어요 -->
-									<tr class="userTr" data-userid="${vo.userId} }">
+									<tr class="userTr" data-userid="${vo.userId}">
 									<td class="userId">${vo.userId }</td>
 									<td>${vo.name }</td>
 									<td>${vo.alias }</td>
-									<td></td>	
+									<td><a href="${cp}/user/userListExcel?filename=${vo.userId}&userId=${vo.userId}">excel 다운</a></td>	
 									</tr>
 								</c:forEach>
 							</table>
@@ -114,20 +114,6 @@
 								</c:otherwise>
 							</c:choose>
 							
-							
-					<%-- 	<% PageVo pageVo = (PageVo) request.getAttribute("pageVo");%>  --%>
-<%-- 							<%if(pageVo.getPage()==1){ %> --%>
-<!-- 								<li class="disabled"><span>«</span></li> -->
-<%-- 							<%}else{ %> --%>
-<!-- 								<li> -->
-<%-- 									<a href=" ${cp }/userPagingList?page=<%=pageVo.getPage()-1%>&pageSize=<%=pageVo.getPageSize()%>">«</a> --%>
-<!-- 								</li> -->
-<%-- 							<%} %> --%>
-							
-								<!-- 내가 현재 어떤 Page를 보고있나? 어떻게 알지??? 최대 page수 -->
-								
-							<%-- <%	int paginationSize = (Integer) request.getAttribute("paginationSize"); %> --%>
-								
 								<c:forEach var="i" begin="1" end="${paginationSize }">
 									<c:choose>
 										<c:when test="${pageVo.page eq i}" >
@@ -143,19 +129,6 @@
 									</c:choose>
 								</c:forEach>
 								
-								<%-- <% for (int i = 1; i <= paginationSize; i++) {%>
-
-									<%if(pageVo.getPage() == i){ %>
-											<li class="active">
-												<span><%=i %></span>
-											</li>
-									<%}else{%>
-											<li>
-												<a href="${cp }/userPagingList?page=<%=i%>&pageSize=${pageVo.pageSize}"><%=i%></a>
-											</li>
-										<%} %>
-									<%} %> --%>
-									
 								<c:choose>
 								<c:when test="${pageVo.page eq paginationSize }">
 									<li class="disabled"><span>»</span></li>
@@ -166,16 +139,6 @@
 									</li>
 								</c:otherwise>
 								</c:choose>
-								
-								<%-- 	<%if(pageVo.getPage()==paginationSize){ %>
-								<li class="disabled"><span>»</span></li>
-							<%}else{ %>
-								<li>
-									<a href=" ${cp }/userPagingList?page=<%=pageVo.getPage()+1%>&pageSize=<%=pageVo.getPageSize()%>">»</a>
-								
-								</li>
-							<%} %> --%>
-									
 							</ul>
 						</div>
 					</div>

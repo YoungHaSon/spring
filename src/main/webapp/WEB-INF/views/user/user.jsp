@@ -25,12 +25,17 @@
 
 <!-- LibLib(Css,js) -->
 <%@include file="/WEB-INF/views/common/basicLib.jsp"%>
-<script>
-	
-</script>
 
+<!-- 	<script>
+		$(document).ready(function(){
+			<c:if test="${msg != null}">
+				alert("${msg}");
+			</c:if>
+		});
+	</script>  -->
 </head>
 <body>
+
 	<!--  header영역 -->
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 
@@ -52,7 +57,7 @@
 								<label for="userNm" class="col-sm-2 control-label">사용자 사진&nbsp;&nbsp; :  </label>
 								<div class="col-sm-10">
 								<!-- get방식으로 갑니다잉 -->
-									<img src="${cp }/profile?userId=${userVo.userId}">
+									<img src="${cp }/user/profile?userId=${userVo.userId}">
 								</div>
 							</div>
 						

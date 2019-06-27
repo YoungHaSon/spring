@@ -8,6 +8,7 @@
 <!-- core라이브러리를 쓸꺼니까! uri 잘 확인 -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,6 @@
 <script>
 
 	$(document).ready(function(){
-		
 		var msg = '${msg}';
 		if(msg != '')
 			alert(msg);
@@ -99,6 +99,7 @@
 								<label for="userNm" class="col-sm-2 control-label">사용자아이디&nbsp;&nbsp; :  </label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="userId"	name="userId" placeholder="아이디" value="${param.userId }" /> 
+									<form:errors path="userVo.userId"/>
 								</div>
 							</div>
 							
@@ -106,6 +107,7 @@
 								<label for="userNm" class="col-sm-2 control-label">사용자이름&nbsp;&nbsp; :  </label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="name" name="name" placeholder="이름" value="${param.name }" /> 
+									<form:errors path="userVo.name"/>
 								</div>
 							</div>
 							
@@ -126,14 +128,15 @@
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">생일&nbsp;&nbsp; :  </label>
 								<div class="col-sm-10">
-									<input type="date" class="form-control" id="birth" name="birth" placeholder="생일" /> 
+								<fmt:formatDate value="${requestScope.userVo.birth }" var="birth" pattern="yyyy-MM-dd"/>
+									<input type="date" class="form-control" id="birth" name="birth" placeholder="생일" value="${param.birth }" /> 
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">우편번호&nbsp;&nbsp; :  </label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="zipcd" name="zipcd" placeholder="우편번호" readonly />
+									<input type="text" class="form-control" id="zipcd" name="zipcd" placeholder="우편번호" value="${param.zipcd }" readonly />
 								</div>
 								<div class="col-sm-2">
 									<button type="button" id="addrSearchbtn" class="btn btn-default pull-right">주소 검색</button>
@@ -143,14 +146,14 @@
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">주소&nbsp; :  </label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" readonly />
+									<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" value="${param.addr1 }" readonly />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="userNm" class="col-sm-2 control-label">상세주소&nbsp;&nbsp; :  </label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소" />
+									<input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소" value="${param.addr2 }" />
 								</div>
 							</div>
 							

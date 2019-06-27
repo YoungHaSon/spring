@@ -3,7 +3,7 @@
     
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
-		<li class="active"><a href="${cp}/main.jsp">Main.jsp</a></li>
+		<li class="active"><a href="${cp}/main">Main.jsp</a></li>
 	
 		<li class="active"><a href="${cp}/user/list">/user/userList.jsp</a></li>
 		

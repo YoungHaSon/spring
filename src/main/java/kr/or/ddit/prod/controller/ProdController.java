@@ -40,9 +40,10 @@ public class ProdController {
 		model.addAttribute("paginationSize", paginationSize);
 		model.addAttribute("pageVo", pageVo);
 		
-		
 		return "prod/prodPagination";
 	}
+	
+
 	
 	
 
