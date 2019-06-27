@@ -5,13 +5,69 @@
   
 <mapper namespace="prod">
 
-	<select id="prodList" resultType="prodvo" parameterType="String" >
-		select *from
-	    prod
-	    where
-	    prod_lgu = 'P201'
+	<!-- 특정 lprod 선택시 ProdPagingList -->
+	<select id="selectProdPagingList" resultType="prodvo" parameterType="map" >
+		<![CDATA[
+		select 
+		    PROD_ID,
+		    PROD_NAME,
+		    PROD_LGU,
+		    PROD_BUYER,
+		    PROD_COST,
+		    PROD_PRICE,
+		    PROD_SALE
+		    from
+		    (select a.*, rownum rn
+		    from
+		    (select a.*
+		    from prod a
+		    where prod_lgu = #{prod_lgu}
+		    order by prod_id) a)
+		    where rn >=(#{page}-1)*#{pageSize}+1 and rn <= #{page}*#{pageSize}
+		    ]]>
 	</select>
-
+	
+	<!-- 특정  prodlist 개수 -->
+	<select id="selectProdCnt" parameterType="String" resultType="int">
+  		select count(*)
+   		from prod
+    	where prod_lgu = #{prod_lgu}
+  	</select>
+  	
+  	<!-- prodList전체 pagingnation -->
+	<select id="prodPagingList" resultType="prodvo" parameterType="pagevo" >
+		<![CDATA[
+		select 
+		    PROD_ID,
+		    PROD_NAME,
+		    PROD_LGU,
+		    PROD_BUYER,
+		    PROD_COST,
+		    PROD_PRICE,
+		    PROD_SALE
+		    from
+		    (select a.*, rownum rn
+		    from
+		    (select a.*
+		    from prod a
+		    order by prod_id) a)
+		    where rn >=(#{page}-1)*#{pageSize}+1 and rn <= #{page}*#{pageSize}
+		    ]]>
+	</select>
+	
+	<select id="prodCnt" resultType="int">
+  		select count(*)
+		from 
+			prod
+  	</select>
+  	
+  	<select id="lprodList" resultType="lprodvo">
+  		select lprod_gu
+	    from lprod
+	    order by lprod_id
+  	</select>
+  	
+	
 
 
 </mapper>

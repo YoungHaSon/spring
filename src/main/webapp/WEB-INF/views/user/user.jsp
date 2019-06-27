@@ -25,8 +25,11 @@
 
 <!-- LibLib(Css,js) -->
 <%@include file="/WEB-INF/views/common/basicLib.jsp"%>
-</head>
+<script>
+	
+</script>
 
+</head>
 <body>
 	<!--  header영역 -->
 	<%@include file="/WEB-INF/views/common/header.jsp"%>

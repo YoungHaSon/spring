@@ -5,7 +5,7 @@
   
   <mapper namespace="lprod">
   
-  	<select id="lprodPagingList" parameterType="pageVo" resultType="lprodvo">
+  	<select id="lprodPagingList" parameterType="pagevo" resultType="lprodvo">
 	  	<![CDATA[
 			select *
 			from

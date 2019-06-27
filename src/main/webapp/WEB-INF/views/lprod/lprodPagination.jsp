@@ -18,7 +18,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>사용자 리스트</title>
+<title>LprodList</title>
 
 <!-- LibLib(Css,js) -->
 <%@include file="/WEB-INF/views/common/basicLib.jsp"%>
@@ -38,7 +38,7 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자</h2>
+						<h2 class="sub-header">LprodList</h2>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<tr>
@@ -59,7 +59,7 @@
 							</table>
 						</div>
 
-						<a class="btn btn-default pull-right">사용자 등록</a>
+						<a class="btn btn-default pull-right">lprod 등록</a>
 
 						<!-- 
 							사용자수 : 105건

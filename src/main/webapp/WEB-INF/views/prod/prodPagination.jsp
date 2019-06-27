@@ -18,7 +18,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>사용자 리스트</title>
+<title>ProdList</title>
 
 <!-- LibLib(Css,js) -->
 <%@include file="/WEB-INF/views/common/basicLib.jsp"%>
@@ -38,28 +38,33 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자</h2>
+						<h2 class="sub-header">ProdList</h2>
+					
+						<select>
+							<option value="${lprodList}">
+						</select>
+						
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<tr>
-									<th>사용자 아이디(el)</th>
-									<th>사용자 이름(el)</th>
-									<th>사용자 별명(el)</th>
-									<th>등록일시</th>
+									<th>prod_name</th>
+									<th>prod_cost</th>
+									<th>prod_price</th>
+									<th>prod_sale</th>
 								</tr>
 
-								<c:forEach items="${prodList }" var="lprod">
+								<c:forEach items="${prodList }" var="prod">
 									<tr>
-										<td>${prod.lprod_id }</td>
-										<td>${prod.lprod_gu }</td>
-										<td>${prod.lprod_nm }</td>
-										<td></td>
+										<td>${prod.prod_name }</td>
+										<td>${prod.prod_cost }</td>
+										<td>${prod.prod_price }</td>
+										<td>${prod.prod_sale }</td>
 									</tr>
 								</c:forEach>
 							</table>
 						</div>
 
-						<a class="btn btn-default pull-right">사용자 등록</a>
+						<a class="btn btn-default pull-right">prod 등록</a>
 
 						<!-- 
 							사용자수 : 105건
@@ -76,7 +81,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
-									<a href=" ${cp }/lprod/lprodpagination?page=${pageVo.page-1}&pageSize=${pageVo.pageSize}">«</a>
+									<a href=" ${cp }/prod/prodpagination?page=${pageVo.page-1}&pageSize=${pageVo.pageSize}">«</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -90,7 +95,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="${cp }/lprod/lprodpagination?page=${i}&pageSize=${pageVo.pageSize}">${i}</a>
+											<a href="${cp }/prod/prodpagination?page=${i}&pageSize=${pageVo.pageSize}">${i}</a>
 										</li>
 									</c:otherwise>	
 									</c:choose>
@@ -103,7 +108,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-										<a href=" ${cp }/lprod/lprodpagination?page=${pageVo.page+1}&pageSize=${pageVo.pageSize}">»</a>
+										<a href=" ${cp }/prod/prodpagination?page=${pageVo.page+1}&pageSize=${pageVo.pageSize}">»</a>
 										</li>
 									</c:otherwise>
 								</c:choose>

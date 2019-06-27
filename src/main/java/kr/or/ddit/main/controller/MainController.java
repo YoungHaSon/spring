@@ -3,6 +3,8 @@ package kr.or.ddit.main.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddit.main.model.MainVo;
 import kr.or.ddit.user.model.UserVo;
 
 /*
@@ -27,6 +31,22 @@ import kr.or.ddit.user.model.UserVo;
 */
 
 //1. 요 선언이 먼저!
+/**
+* MainController.java
+*
+* @author PC13
+* @version 1.0
+* @see
+*
+* <pre>
+* << 개정이력(Modification Information) >>
+*
+* 수정자 수정내용
+* ------ ------------------------
+* PC13 최초 생성
+*
+* </pre>
+*/
 @Controller
 @SessionAttributes("rangers")
 public class MainController {
@@ -140,5 +160,47 @@ public class MainController {
 		logger.debug("♬♪♩ Accept : {}", accept);
 		return "main";
 	}
+	
+	/**
+	* Method : view
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param request
+	* @return
+	* Method 설명 : 복수 파라미터 테스트를 위한 view
+	*/
+	@RequestMapping("/main/view")
+	public String view(HttpServletRequest request) {
+		return "view"; //앞에 암것도 없으면 views폴더 다음에
+	}
+	
+	//List<>타입의 경우 @RequestParam 해야함
+	@RequestMapping("main/process")
+	public String process(HttpServletRequest request, String[] userId,
+			@RequestParam("userId") List<String> userIdList, MainVo mainVo) { //메서드 인자 명이 parameter값과 같으면 개이득!
+		// @RequestParam("userId") List<String> userIdList) userId라는 매개를 List<String> userIdList String타입의 리스트인 userIdList라는 이름으로 받겠다!고 지정하는것!
+		
+		String userIdgetParameter = request.getParameter("userId");
+		logger.debug("♬♪♩ userIdgetParameter : {}",userIdgetParameter );
+		
+		String[] userIdArr = request.getParameterValues("userId"); //동일한 이름의 복수 파라미터?를 받는? (예를들면 file)
+		logger.debug("♬♪♩ request.getParameterValues(\"userId\")");
+		for(String u : userIdArr)
+			logger.debug("♬♪♩ userId : {}", u ); //Alt + shift + r --> 일괄 수정
+		
+		for(String u : userId)
+			logger.debug("♬♪♩ String[] userId : {}", u ); //Alt + shift + r --> 일괄 수정
+			
+		for(String u : userIdList)
+			logger.debug("♬♪♩ List<String> userIdList : {}", u ); //Alt + shift + r --> 일괄 수정
+	
+		logger.debug("♬♪♩MainVo mainVo : {}",mainVo); //mainVo에 toString값이 출력될듯?
+		
+		return "main";
+		
+	}
+	
+	
+	
 	
 }

@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.model.PageVo;
@@ -226,7 +227,8 @@ public class UserController {
 	 * @throws IllegalStateException 
 	*/
 	@RequestMapping(path = "/modify", method = RequestMethod.POST) //name 속성명!
-	public String userModify(UserVo userVo, String userId, MultipartFile profile, HttpSession session, Model model) throws IllegalStateException, IOException{
+	public String userModify(UserVo userVo, String userId, MultipartFile profile,
+			HttpSession session, Model model, RedirectAttributes redirectAttributes) throws IllegalStateException, IOException{
 //		userVo.setPass(KISA_SHA256.encrypt(userVo.getPass()));
 
 		//사용자가 사진올렸을때!
@@ -236,7 +238,11 @@ public class UserController {
 		int updateCnt = userService.updateUser(userVo);
 		
 		if(updateCnt == 1) {
-			return "redirect:/user/user?userId=" + userVo.getUserId();
+			redirectAttributes.addFlashAttribute("msg", "등록되었습니다.");
+			
+			//return "redirect:/user/user?userId=" + userVo.getUserId() 요거랑 같은뜻
+			redirectAttributes.addAttribute("userId", userVo.getUserId()); //리다이렉트 페이지 파라미터 전달
+			return "redirect:/user/user";
 		}
 		else{
 			return userModify(userVo.getUserId(), model);
