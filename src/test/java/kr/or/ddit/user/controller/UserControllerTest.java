@@ -70,7 +70,7 @@ public class UserControllerTest extends ControllerTestEvn {
 
 		/*** Then ***/
 		// viewName, 속성 : userList, paginationSize, pageVo
-		assertEquals("user/pagination", viewName);
+		assertEquals("tiles.userPagingList", viewName);
 		assertEquals(10, userList.size());
 		assertEquals(11, paginationSize);
 		assertEquals(2, pageVo.getPage());
@@ -99,7 +99,7 @@ public class UserControllerTest extends ControllerTestEvn {
 
 		/*** Then ***/
 		// viewName, 속성 : userList, paginationSize, pageVo
-		assertEquals("user/pagination", viewName);
+		assertEquals("tiles.userPagingList", viewName);
 		assertEquals(10, userList.size());
 		assertEquals(11, paginationSize);
 
@@ -246,7 +246,7 @@ public class UserControllerTest extends ControllerTestEvn {
 											.param("addr2", "영민빌딩 2층 204호")
 											.param("zipcd", "34940")
 											.param("birth", "2019-05-31")
-											.param("pass", "userTest1234")).andExpect(view().name("redirect:/user/user?userId=brown"));
+											.param("pass", "userTest1234")).andExpect(view().name("redirect:/user/user"));
 		/***Then***/
 		
 	}
