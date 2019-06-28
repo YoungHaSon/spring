@@ -79,15 +79,14 @@ public class UserController {
 		List<UserVo> userList =null;
 		
 		if(userId==null) {
-			model.addAttribute("userList", userService.userList());
+			model.addAttribute("data", userService.userList());
 		}else {
 			userList= new ArrayList<UserVo>();
 			userList.add(userService.getUser(userId));
-			model.addAttribute("userList", userList);
+			model.addAttribute("data", userList);
 		}
 		model.addAttribute("header", header);
 		model.addAttribute("filename", filename);
-		model.addAttribute("data", userService.userList());
 		
 		return "userExcelView"; //--> 빈 등록은 이 이름으로!  
 	}
