@@ -15,5 +15,8 @@
 		
 		<!-- a 태그는 기본적으로 get방식을 사용 -->
 		<li class="active"><a href="${cp}/prod/prodpagination">prod_PageList</a></li>
+		
+		<!-- a 태그는 기본적으로 get방식을 사용 -->
+		<li class="active"><a href="${cp}/user/pagingListAjaxView">pagination.jsp(ajax)</a></li>
 	</ul>
 </div>

@@ -1,7 +1,6 @@
 package kr.or.ddit.user.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -121,6 +117,57 @@ public class UserController {
 //		return "user/pagination";
 		return "tiles.userPagingList";
 	}
+	
+	/**
+	* Method : pagingListAjax
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : 사용자 pagingList 값만 ajax처리!
+	*/
+	@RequestMapping("/pagingListAjax") //매개 받기 , 기본값설정
+	public String pagingListAjax(PageVo pageVo, Model model) {
+		
+		logger.debug("♬♪♩ corsor : {}",userService.userPagingList(pageVo));
+		
+		model.addAttribute("data", userService.userPagingList(pageVo));
+		//{data {userList  
+		
+		return "jsonView";
+	}
+	
+	/**
+	* Method : pagingListAjaxHtml
+	* 작성자 : PC13
+	* 변경이력 :
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : 
+	*/
+	@RequestMapping("/pagingListAjaxHtml") //매개 받기 , 기본값설정
+	public String pagingListAjaxHtml(PageVo pageVo, Model model) {
+		
+		logger.debug("♬♪♩ corsor : {}",userService.userPagingList(pageVo));
+		
+		model.addAttribute("data", userService.userPagingList(pageVo));
+		
+		return "user/userPagingListAjaxHtml";
+	}
+	
+	/**
+	* Method : pagingListAjaxView
+	* 작성자 : PC13
+	* 변경이력 :
+	* @return
+	* Method 설명 : 사용자 pagingList 값 화면에서 처리!
+	*/
+	@RequestMapping("/pagingListAjaxView")
+	public String pagingListAjaxView() {
+		return "tiles.pagingListAjaxView";
+	}         
 	
 	/**
 	* Method : user
