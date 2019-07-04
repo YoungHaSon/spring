@@ -31,6 +31,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 	* @throws Exception
 	* Method 설명 : 로그인한 사용자만 controller에 접근이 가능하도록 체크
 	*/
+	//컨트롤러가 호출되기 전에 실행되는 메서드이다.
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -49,6 +50,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 		
 	}
 
+	//컨트롤러가 호출되고 난 후에 실행되는 메서드이다.
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

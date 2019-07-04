@@ -25,8 +25,8 @@
 		});
 		
 		//첫번째 페이지의 사용자 정보를 요청
-// 		userPagingListAjax(1,10);
-		userPagingListAjaxHtml(1,10);
+		userPagingListAjax(1,10);
+// 		userPagingListAjaxHtml(1,10);
 	});
 	
 	//데이터 응답을 html로 받는 경우
@@ -73,14 +73,14 @@
 				else
 					pHtml += "<li><a href='javascript:userPagingListAjax("+(pageVo.page-1)+", "+pageVo.pageSize+");'>«</a></li>";
 				
-				for(var i =1; i <=data.data.pagenationSize; i++){
+				for(var i =1; i <=data.data.paginationSize; i++){
 					if(pageVo.page==i)
 						pHtml += "<li class='active'><span>" + i + "</span></li>";
 					else
 						pHtml += "<li><a href='javascript:userPagingListAjax("+ i + ", " + pageVo.pageSize+");'>"+i+"</a></li>";
 				}
 				
-				if(pageVo.page == data.data.pagenationSize)
+				if(pageVo.page == data.data.paginationSize)
 					pHtml += "<li class='disabled'><span>»<span></li>";
 				else
 					pHtml += "<li><a href='javascript:userPagingListAjax("+(pageVo.page+1)+", "+pageVo.pageSize+");'>»</a></li>";
