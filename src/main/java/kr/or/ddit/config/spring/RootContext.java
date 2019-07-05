@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 //service, repository 두 @을 대상으로 스캔하겠다
-@Configuration								//요거 중요! 안하면 bean이 여러개 생김
+@Configuration			//설정파일이라는 표시!					//요거 중요! 안하면 bean이 여러개 생김
 @ComponentScan(basePackages = "kr.or.ddit", useDefaultFilters = false
 						, includeFilters = {@Filter(type = FilterType.ANNOTATION, classes = {Service.class , Repository.class})})
 public class RootContext {

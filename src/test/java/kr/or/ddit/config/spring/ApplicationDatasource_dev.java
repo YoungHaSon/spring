@@ -12,9 +12,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
-@PropertySource("classpath:kr/or/ddit/config/mybatis/db.properties")
+@PropertySource("classpath:kr/or/ddit/config/mybatis/db_dev.properties")
 @Configuration	//설정파일이라는 표시!							
-public class ApplicationDatasource {
+public class ApplicationDatasource_dev {
 
 	@Autowired
 	private Environment env;

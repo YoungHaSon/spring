@@ -17,12 +17,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import kr.or.ddit.config.spring.ApplicationContext;
+import kr.or.ddit.config.spring.ApplicationDatasource_dev;
+import kr.or.ddit.config.spring.ApplicationTransaction;
+import kr.or.ddit.config.spring.RootContext;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 //설정한 것들을 가져오는
-@ContextConfiguration({"classpath:kr/or/ddit/config/spring/application-context.xml",
-						"classpath:kr/or/ddit/config/spring/root-context.xml",
-						"classpath:kr/or/ddit/config/spring/application-datasource_dev.xml",
-						"classpath:kr/or/ddit/config/spring/application-transaction.xml"})
+//@ContextConfiguration({"classpath:kr/or/ddit/config/spring/application-context.xml",
+//						"classpath:kr/or/ddit/config/spring/root-context.xml",
+//						"classpath:kr/or/ddit/config/spring/application-datasource_dev.xml",
+//						"classpath:kr/or/ddit/config/spring/application-transaction.xml"})
+@ContextConfiguration(classes = {ApplicationContext.class, RootContext.class, ApplicationDatasource_dev.class, ApplicationTransaction.class})
 
 //웹 환경에서의 테스트 
 

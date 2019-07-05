@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
-@Configuration
+@Configuration//설정파일이라는 표시!
 public class ApplicationTransaction {
 	
 	@Resource(name="datasource")
