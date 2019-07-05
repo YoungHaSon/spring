@@ -24,7 +24,8 @@
 <%@include file="/WEB-INF/views/common/basicLib.jsp"%>
 <script>
 	$(document).ready(function(){
-		$('#lprod').val("${lprod}");
+		$('#lprod').val("${prod_lgu}");
+		console.log("${prod_lgu}");
 		$("#lprod").change(function(){
 			$('#frm').submit();
 		});
@@ -47,13 +48,14 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">PordList</h2>
+						<h2 class="sub-header">ProdList</h2>
 					
-						<form id="frm" action="${cp}/prodpagination" method="post">
-						<select id="lprod" name="lprod" >
+						<form id="frm" action="prodPagination" method="post">
+						<select id="lprod" name="prod_lgu">
 							<c:forEach items="${lprodList}" var="lprod" >
-								<option value="${lprod.lprod_gu}" >${lprod.lprod_nm}</option>
+								<option value="${lprod.lprod_gu}">${lprod.lprod_nm}</option>
 							</c:forEach>
+							
 						</select>
 						</form>
 						
