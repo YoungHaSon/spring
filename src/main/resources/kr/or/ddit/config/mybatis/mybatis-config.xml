@@ -11,12 +11,16 @@
 		<typeAlias alias="pagevo" type="kr.or.ddit.user.model.PageVo" />
 		<typeAlias alias="prodvo" type="kr.or.ddit.prod.model.ProdVo" />
 		<typeAlias alias="lprodvo" type="kr.or.ddit.lprod.model.LprodVo" />
+		
+		<typeAlias alias="cycleVo" type="kr.or.ddit.yogult.model.CycleVo" />
+		<typeAlias alias="dailyVo" type="kr.or.ddit.yogult.model.DailyVo" />
 	</typeAliases>
 
 	<mappers><!-- sql문 관리 -->
 		<mapper resource="kr/or/ddit/config/mybatis/mapper/user.xml" />
 		<mapper resource="kr/or/ddit/config/mybatis/mapper/prod.xml" />
 		<mapper resource="kr/or/ddit/config/mybatis/mapper/lprod.xml" />
+		<mapper resource="kr/or/ddit/config/mybatis/mapper/batch.xml" />
 	</mappers>
 
 </configuration>
